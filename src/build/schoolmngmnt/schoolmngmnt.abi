@@ -1,0 +1,390 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Tue Mar 12 15:51:32 2019",
+    "version": "eosio::abi/1.1",
+    "structs": [
+        {
+            "name": "addmark",
+            "base": "",
+            "fields": [
+                {
+                    "name": "student",
+                    "type": "name"
+                },
+                {
+                    "name": "subject",
+                    "type": "string"
+                },
+                {
+                    "name": "score",
+                    "type": "int64"
+                },
+                {
+                    "name": "staff",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "approvetrans",
+            "base": "",
+            "fields": [
+                {
+                    "name": "student",
+                    "type": "name"
+                },
+                {
+                    "name": "approver",
+                    "type": "name"
+                },
+                {
+                    "name": "institution",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "discipline",
+            "base": "",
+            "fields": [
+                {
+                    "name": "student",
+                    "type": "name"
+                },
+                {
+                    "name": "action",
+                    "type": "string"
+                },
+                {
+                    "name": "comment",
+                    "type": "string"
+                },
+                {
+                    "name": "starttime",
+                    "type": "time_point_sec"
+                },
+                {
+                    "name": "endtime",
+                    "type": "time_point_sec"
+                },
+                {
+                    "name": "staff",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "indiscipline",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "student",
+                    "type": "name"
+                },
+                {
+                    "name": "official",
+                    "type": "name"
+                },
+                {
+                    "name": "reason",
+                    "type": "string"
+                },
+                {
+                    "name": "comment",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "initschool",
+            "base": "",
+            "fields": [
+                {
+                    "name": "school",
+                    "type": "name"
+                },
+                {
+                    "name": "location",
+                    "type": "string"
+                },
+                {
+                    "name": "long_name",
+                    "type": "string"
+                },
+                {
+                    "name": "category",
+                    "type": "string"
+                },
+                {
+                    "name": "email",
+                    "type": "string"
+                },
+                {
+                    "name": "creator",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "initstudent",
+            "base": "",
+            "fields": [
+                {
+                    "name": "student",
+                    "type": "name"
+                },
+                {
+                    "name": "full_name",
+                    "type": "string"
+                },
+                {
+                    "name": "school",
+                    "type": "name"
+                },
+                {
+                    "name": "creator",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "inittransfer",
+            "base": "",
+            "fields": [
+                {
+                    "name": "student",
+                    "type": "name"
+                },
+                {
+                    "name": "to_school",
+                    "type": "name"
+                },
+                {
+                    "name": "staff",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "markentry",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "student",
+                    "type": "name"
+                },
+                {
+                    "name": "subject",
+                    "type": "string"
+                },
+                {
+                    "name": "score",
+                    "type": "int64"
+                }
+            ]
+        },
+        {
+            "name": "school",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "school",
+                    "type": "name"
+                },
+                {
+                    "name": "location",
+                    "type": "string"
+                },
+                {
+                    "name": "longname",
+                    "type": "string"
+                },
+                {
+                    "name": "category",
+                    "type": "string"
+                },
+                {
+                    "name": "email",
+                    "type": "string"
+                },
+                {
+                    "name": "creator",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "staff",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "staff",
+                    "type": "name"
+                },
+                {
+                    "name": "fullname",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "stransfer",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "student",
+                    "type": "name"
+                },
+                {
+                    "name": "comment",
+                    "type": "string"
+                },
+                {
+                    "name": "approved_from",
+                    "type": "bool"
+                },
+                {
+                    "name": "approved_to",
+                    "type": "bool"
+                },
+                {
+                    "name": "from",
+                    "type": "name"
+                },
+                {
+                    "name": "to",
+                    "type": "name"
+                },
+                {
+                    "name": "init",
+                    "type": "time_point_sec"
+                }
+            ]
+        },
+        {
+            "name": "student",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "student",
+                    "type": "name"
+                },
+                {
+                    "name": "fullname",
+                    "type": "string"
+                },
+                {
+                    "name": "creator",
+                    "type": "name"
+                },
+                {
+                    "name": "school",
+                    "type": "name"
+                }
+            ]
+        }
+    ],
+    "types": [],
+    "actions": [
+        {
+            "name": "addmark",
+            "type": "addmark",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "approvetrans",
+            "type": "approvetrans",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "discipline",
+            "type": "discipline",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "initschool",
+            "type": "initschool",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "initstudent",
+            "type": "initstudent",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "inittransfer",
+            "type": "inittransfer",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "indiscplines",
+            "type": "indiscipline",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "marks",
+            "type": "markentry",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "schools",
+            "type": "school",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "staffs",
+            "type": "staff",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "stransfers",
+            "type": "stransfer",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "students",
+            "type": "student",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "variants": [],
+    "abi_extensions": []
+}
