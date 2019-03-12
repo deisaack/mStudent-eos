@@ -21,8 +21,8 @@ CONTRACT schoolmngmnt : public eosio::contract
       Actions
     */
     ACTION initstudent(eosio::name student, string full_name, eosio::name school, eosio::name creator);                                               // Initialize a student instance
-    ACTION initschool(eosio::name school, string location, string category, string email, eosio::name creator);                                       // Initialiaze institution instance
-    ACTION update(eosio::name student, string full_name, eosio::name staff);                                                                          // Update student record(s)
+    ACTION initschool(eosio::name school, string location, string long_name, string category, string email, eosio::name creator);                                       // Initialiaze institution instance
+    ACTION addmark(eosio::name student, string subject, int64_t score, eosio::name staff);                                                            // Update student record(s)
     ACTION inittransfer(eosio::name student, eosio::name to_school, eosio::name staff);                                                               // Initialize a student transfer
     ACTION approvetrans(eosio::name student, eosio::name approver, eosio::name institution);                                                          // Approve a transfer
     ACTION discipline(eosio::name & student, string & action, string & comment, time_point_sec starttime, time_point_sec endtime, eosio::name staff); // Disciplinary Action against a student?
@@ -41,6 +41,9 @@ CONTRACT schoolmngmnt : public eosio::contract
         string category;
         string email;
         eosio::name creator;
+
+        // uint64_t primary_key() const { return id; }
+        uint64_t primary_key() const {return school.value;}
     };
     typedef eosio::multi_index<"schools"_n, school> schools_index;
 
@@ -51,15 +54,19 @@ CONTRACT schoolmngmnt : public eosio::contract
         string fullname;
         eosio::name creator;
         eosio::name school;
+
+        uint64_t primary_key() const { return student.value; }
     };
     typedef eosio::multi_index<"students"_n, student> students_index;
 
-    TABLE markentry{
+    TABLE markentry
+    {
         uint64_t id;
         eosio::name student;
         string subject;
         int64_t score;
-    };  
+        uint64_t primary_key() const { return student.value;}
+    };
     typedef eosio::multi_index<"marks"_n, markentry> marks_index;
 
     TABLE staff
@@ -67,6 +74,8 @@ CONTRACT schoolmngmnt : public eosio::contract
         uint64_t id;
         eosio::name staff;
         string fullname;
+
+        uint64_t primary_key() const { return staff.value; }
     };
     typedef eosio::multi_index<"staffs"_n, staff> staffs_index;
 
@@ -80,6 +89,8 @@ CONTRACT schoolmngmnt : public eosio::contract
         eosio::name from;
         eosio::name to;
         eosio::time_point_sec init;
+
+        uint64_t primary_key() const { return student.value; }
     };
     typedef eosio::multi_index<"stransfers"_n, stransfer> transfers_index;
 
@@ -90,6 +101,8 @@ CONTRACT schoolmngmnt : public eosio::contract
         eosio::name official;
         string reason;
         string comment;
+
+        uint64_t primary_key() const { return student.value; }
     };
     typedef eosio::multi_index<"indiscplines"_n, indiscipline> indiscplines_index;
 
