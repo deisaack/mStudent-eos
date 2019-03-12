@@ -53,7 +53,7 @@ ACTION schoolmngmnt::initschool(eosio::name school, string location, string long
     else
     {
         // School with given name found. UPDATE/MODIFY
-        _schools.modify(itr, get_self(), [&](auto &std) {
+        _schools.modify(itr, get_self(), [&](auto &sch) {
             sch.school = school;
             sch.location = location;
             sch.longname = long_name;
@@ -64,10 +64,10 @@ ACTION schoolmngmnt::initschool(eosio::name school, string location, string long
     }
 }
 
-ACTION schoolmngmnt::update(eosio::name student, string full_name, eosio::name staff)
-{
-    // Already taken care of above. IGNORE for now.
-}
+// ACTION schoolmngmnt::update(eosio::name student, string full_name, eosio::name staff)
+// {
+//     // Already taken care of above. IGNORE for now.
+// }
 
 ACTION schoolmngmnt::inittransfer(eosio::name student, eosio::name to_school, eosio::name staff)
 {
@@ -81,17 +81,31 @@ ACTION schoolmngmnt::inittransfer(eosio::name student, eosio::name to_school, eo
     });
 }
 
+ACTION schoolmngmnt::addmark(eosio::name student, string subject, int64_t score, eosio::name staff)
+{
+    require_auth(staff);
+    auto itr = _students.find(student.value);
+
+    eosio_assert(itr != _students.end(), "was unable to find that student");
+
+    _marks.emplace(get_self(), [&](auto & mrk){
+        mrk.id = _marks.available_primary_key();
+        mrk.student = student;
+        mrk.subject = subject;
+        mrk.score = score;
+    });
+}
+
 ACTION schoolmngmnt::approvetrans(eosio::name student, eosio::name approver, eosio::name institution)
 {
     require_auth(approver);
 
     // TODO - Check that `approver` is a staff member of either the `from_school` or the `to_school` using the `schoolmngmnt::check_membership` function
-
-    
 }
 
 ACTION schoolmngmnt::discipline(eosio::name &student, string &action, string &comment, time_point_sec starttime, time_point_sec endtime, eosio::name staff)
 {
+    require_auth(staff);
 }
 
 extern "C" void apply(uint64_t receiver, uint64_t code, uint64_t action)
@@ -109,7 +123,7 @@ extern "C" void apply(uint64_t receiver, uint64_t code, uint64_t action)
     {
         switch (action)
         {
-            EOSIO_DISPATCH_HELPER(schoolmngmnt, (initstudent)(initschool)(inittransfer)(approvetrans)(discipline))
+            EOSIO_DISPATCH_HELPER(schoolmngmnt, (initstudent)(initschool)(addmark)(inittransfer)(approvetrans)(discipline))
         }
     }
 }
